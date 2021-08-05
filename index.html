@@ -16,6 +16,33 @@
 
 <body class="body-light">
     <div class="cont-main main-light">
+        <div class="position-absolute">
+            <div class="date">
+                <p id="date"></p>
+            </div>
+            <div class="circles">
+                <div class="circle-down circle-light"></div>
+                <div class="icon" id="icon"></div>
+                <div class="circle-up circle-light"></div>
+            </div>
+            <div class="cont-variables variables-light">
+                <div class="wind">
+                    <i class="icon-cloud-wind"></i>
+                    <p class="text-light" id="wind"></p>
+                    <p class="text-light">Wind</p>
+                </div>
+                <div class="humidity">
+                    <i class="icon-droplet"></i>
+                    <p class="text-light" id="humidity"></p>
+                    <p class="text-light">Humidity</p>
+                </div>
+                <div class="visibility">
+                    <i class="icon-eye"></i>
+                    <p class="text-light" id="visibility"></p>
+                    <p class="text-light">Visibility</p>
+                </div>
+            </div>
+        </div>
         <div class="cont-current current-light">
             <div class="input body-light">
                 <input class="text-light" type="text" placeholder="Please introduce the place">
@@ -30,11 +57,7 @@
                     </button>
                 </div>
             </div>
-
             <div class="information">
-                <div class="date">
-                    <p id="date"></p>
-                </div>
                 <div class="conditions">
                     <div></div>
                     <div>
@@ -43,26 +66,6 @@
                     </div>
                     <div></div>
                 </div>
-                <div class="icon" id="icon"></div>
-                <div class="circle-up circle-light"></div>
-                <div class="circle-down circle-light"></div>
-            </div>
-        </div>
-        <div class="cont-variables variables-light">
-            <div class="wind">
-                <i class="icon-cloud-wind"></i>
-                <p class="text-light" id="wind"></p>
-                <p class="text-light">Wind</p>
-            </div>
-            <div class="humidity">
-                <i class="icon-droplet"></i>
-                <p class="text-light" id="humidity"></p>
-                <p class="text-light">Humidity</p>
-            </div>
-            <div class="visibility">
-                <i class="icon-eye"></i>
-                <p class="text-light" id="visibility"></p>
-                <p class="text-light">Visibility</p>
             </div>
         </div>
         <div class="cont-forecast forecast-light">
@@ -84,7 +87,6 @@
                     <p class="text-light time"></p>
                 </div>
             </div>
-
             <div class="day-forecast">
                 <p class="day-3 text-light">After Tomorrow</p>
                 <div class="purple">
@@ -96,10 +98,9 @@
             </div>
         </div>
     </div>
-    <script src="req.js"></script>
     <script src="get_date.js"></script>
+    <script src="req.js"></script>
     <script src="javascript.js"></script>
-    
 </body>
 
 </html>

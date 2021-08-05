@@ -4,7 +4,7 @@ function getDate(day, month, dayNumber, hour, minutes) {
     "Monday",
     "Tuesday",
     "Wednesday",
-    "Thersday",
+    "Thursday",
     "Friday",
     "Saturday",
   ];
