@@ -46,7 +46,7 @@ $(".forecast-date").text(function (item) {
 });
 
 let urlFix =
-  "http://api.weatherapi.com/v1/forecast.json?key=7ee0e3877426440b807213507210308&q=guadalajara&days=4&aqi=no&alerts=no";
+  "https://api.weatherapi.com/v1/forecast.json?key=7ee0e3877426440b807213507210308&q=guadalajara&days=4&aqi=no&alerts=no";
 
 $.ajax({
   url: urlFix,
@@ -55,7 +55,6 @@ $.ajax({
     $("h2").text(Math.round(response.current["temp_c"])).append("o".sup());
     $("#event").text(response.current.condition.text);
     $("#icon").attr("src", "https:" + response.current.condition.icon);
-
     $("#wind").text(response.current["wind_kph"] + " km/h");
     $("#humidity").text(response.current["humidity"] + " %");
     $("#visibility").text(response.current["vis_km"] + " Km");
@@ -114,7 +113,7 @@ function findWeather(e) {
   } else {
     let place = $("input").val();
     let urlFirst =
-      "http://api.weatherapi.com/v1/forecast.json?key=7ee0e3877426440b807213507210308&q=";
+      "https://api.weatherapi.com/v1/forecast.json?key=7ee0e3877426440b807213507210308&q=";
     let urlLast = "&days=4&aqi=no&alerts=no";
     let url = urlFirst + place + urlLast;
 

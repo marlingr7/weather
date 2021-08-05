@@ -252,6 +252,7 @@ sup {
   height: 100%;
   z-index: 2;
   outline: none;
+  border: 1px solid transparent;
 }
 
 .circle-up,
@@ -442,6 +443,7 @@ sup {
 .day-forecast img {
   width: 50%;
   height: 30%;
+  border: 1px solid transparent;
 }
 
 @media screen and (max-width: 1350px) {
