@@ -44,6 +44,8 @@ function changeTheme() {
 //Events
 
 initialData();
+select();
+
 $("#btn-theme").click(changeTheme);
 $("#btn-hidden").click(function (e) {
   $(".input").toggleClass("hidden");
@@ -52,11 +54,12 @@ $("#btn-hidden").click(function (e) {
 
 function findWeather() {
   if ($("input").val() == "") {
-    $("input").attr("placeholder", "You must introduce some place");
+    $("input").attr("placeholder", "You must introduce some state");
   } else {
     let date = new Date();
     let hour = date.getHours();
     let place = $("input").val();
+    
     req(place, hour);
   }
 }
@@ -69,3 +72,6 @@ $(document).keypress(function (event) {
     findWeather();
   }
 });
+
+
+

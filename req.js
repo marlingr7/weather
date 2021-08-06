@@ -30,7 +30,7 @@ function req(place, hour) {
       });
     },
     error: function () {
-      alert("Error: Couldn't resolve the request");
+      alert("Sorry. Place don't found. Please try something else");
     },
   });
 }
