@@ -17,7 +17,7 @@ body{
   width: 20%;
   position: absolute;
   z-index: 2;
-  margin-top: 5%;
+  margin-top: 75px;
   border-radius: 0 0 10px 10px;
   display: flex;
   flex-direction: column;
@@ -420,6 +420,7 @@ sup {
   align-items: center;
   margin: 0 0 5% 0;
   padding: 0;
+  cursor: pointer;
 }
 
 .day-forecast p {
@@ -613,7 +614,6 @@ sup {
 
   .posible{
     width: 56%;
-    margin-top: 17%;
   }
 }
 

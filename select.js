@@ -80,7 +80,7 @@ function sortShortWords(a, b) {
   return 0;
 }
 
-function select() {
+function select(key) {
   let states = [
       "Aguascalientes",
       "Baja California",
@@ -121,48 +121,45 @@ function select() {
   // Ordenamos el arreglo de la A a la Z
   words.sort(sortNormalizedWords);
 
-  $("#into").on("input", function () {
-    let key = this.value,
-      posibles = [];
+  let posibles = [];
 
-    if (key.length > 1) {
-      // Normalizamos el valor ingresado
-      key = normalizeWord(key);
+  if (key.length > 1) {
+    // Normalizamos el valor ingresado
+    key = normalizeWord(key);
 
-      // Por cada palabra
-      $.each(words, function (idx, word) {
-        // Validamos que contenga el valor ingresado
-        if (word.normal.indexOf(key.normal) !== -1) {
-          posibles.push(word.original);
-        }
-      });
-
-      // Imprimimos todas las palabras que contienen el valor ingresado
-
-      $("#posible").empty();
-      for (let i = 0; i < posibles.length; i++) {
-        if (
-          document.getElementById("posible").className == "posible body-light"
-        ) {
-          $("#posible").append(
-            "<p class='p-posible text-light'>" + posibles[i] + "</p>"
-          );
-        } else {
-          $("#posible").append(
-            "<p class='p-posible text-light text-dark'>" + posibles[i] + "</p>"
-          );
-        }
+    // Por cada palabra
+    $.each(words, function (idx, word) {
+      // Validamos que contenga el valor ingresado
+      if (word.normal.indexOf(key.normal) !== -1) {
+        posibles.push(word.original);
       }
-    } else {
-      $("#posible").empty();
-    }
-
-    $(".p-posible").click(function (e) {
-      let texto = this.innerHTML;
-      $("input").val(texto); 
-      $("#posible").empty();
-      e.preventDefault();
     });
+
+    // Imprimimos todas las palabras que contienen el valor ingresado
+
+    $("#posible").empty();
+    for (let i = 0; i < posibles.length; i++) {
+      if (
+        document.getElementById("posible").className == "posible body-light"
+      ) {
+        $("#posible").append(
+          "<p class='p-posible text-light'>" + posibles[i] + "</p>"
+        );
+      } else {
+        $("#posible").append(
+          "<p class='p-posible text-light text-dark'>" + posibles[i] + "</p>"
+        );
+      }
+    }
+  } else {
+    $("#posible").empty();
+  }
+
+  $(".p-posible").click(function (e) {
+    let texto = this.innerHTML;
+    $("input").val(texto);
+    $("#posible").empty();
+    findWeather();
+    e.preventDefault();
   });
-  //event
 }
