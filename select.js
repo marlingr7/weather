@@ -137,28 +137,31 @@ function select(key) {
 
     // Imprimimos todas las palabras que contienen el valor ingresado
 
-    $("#posible").empty();
+    $("#poss").empty();
     for (let i = 0; i < posibles.length; i++) {
       if (
-        document.getElementById("posible").className == "posible body-light"
+        document.getElementById("poss").className == "poss body-light"
       ) {
-        $("#posible").append(
-          "<p class='p-posible text-light'>" + posibles[i] + "</p>"
+        $("#poss").append(
+          "<p class='p-poss text-light'>" + posibles[i] + "</p>"
         );
       } else {
-        $("#posible").append(
-          "<p class='p-posible text-light text-dark'>" + posibles[i] + "</p>"
+        $("#poss").append(
+          "<p class='p-poss text-light text-dark'>" + posibles[i] + "</p>"
         );
       }
     }
   } else {
-    $("#posible").empty();
+    $("#poss").empty();
   }
 
-  $(".p-posible").click(function (e) {
+  $(".p-poss").click(function (e) {
     let texto = this.innerHTML;
-    $("input").val(texto);
-    $("#posible").empty();
+    input.val(texto);
+    $("#poss").empty();
+    if ($(".map").hasClass("visibility") == false) {
+      $(".map").addClass("visibility");
+    }
     findWeather();
     e.preventDefault();
   });

@@ -9,105 +9,342 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="moment-with-locales.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/fontello.css">
     <title>Weather App</title>
 </head>
 
-<body >
-    <div class="posible body-light" id="posible"></div>
-    <div class="cont-full body-light">
-        
-        <div class="cont-main main-light">
-            
-            <div class="position-absolute">
-                <div class="date">
-                    <p id="date"></p>
+<body class="body-light">
+    <div class="poss body-light" id="poss"></div>
+    <div class="cont-main main-light" id="main">
+        <div class="position-absolute">
+            <div class="date">
+                <p id="date"></p>
+            </div>
+            <div class="icon" id="icon">
+                <audio id="player" loop></audio>
+            </div>
+            <div class="cont-variables variables-light">
+                <div>
+                    <i class="icon-cloud-wind"></i>
+                    <p class="text-light" id="wind"><span></span> km/h</p>
+                    <p class="text-light">Wind</p>
                 </div>
-                <div class="circles">
-                    <div class="circle-down circle-light"></div>
-                    <div class="icon" id="icon"></div>
-                    <div class="circle-up circle-light"></div>
+                <div>
+                    <i class="icon-droplet"></i>
+                    <p class="text-light" id="humidity"><span></span> %</p>
+                    <p class="text-light">Humidity</p>
                 </div>
-                <div class="cont-variables variables-light">
-                    <div class="wind">
-                        <i class="icon-cloud-wind"></i>
-                        <p class="text-light" id="wind"></p>
-                        <p class="text-light">Wind</p>
-                    </div>
-                    <div class="humidity">
-                        <i class="icon-droplet"></i>
-                        <p class="text-light" id="humidity"></p>
-                        <p class="text-light">Humidity</p>
-                    </div>
-                    <div class="visibility">
-                        <i class="icon-eye"></i>
-                        <p class="text-light" id="visibility"></p>
-                        <p class="text-light">Visibility</p>
-                    </div>
+                <div>
+                    <i class="icon-eye"></i>
+                    <p class="text-light" id="visibility"><span></span> Km</p>
+                    <p class="text-light">Visibility</p>
                 </div>
             </div>
-            <div class="cont-current current-light">
-                <div class="input body-light">
-                    <input class="text-light" id="into" type="text" placeholder="Please introduce the state">
-                    <button id="btn-search"><i class="icon-search text-light"></i></button>
-                </div>
-
-                <div class="nav-bar">
-                    <button id="btn-hidden"><i class="icon-align-left text-light"></i></button>
-                    <p class="text-light" id="place"></p>
-                    <div class="nav-light">
-                        <button id="btn-theme">
-                            <div></div>
-                        </button>
-                    </div>
-                </div>
-                <div class="information">
-                    <div class="conditions">
+        </div>
+        <div class="cont-current current-light">
+            <div class="input body-light">
+                <input class="text-light" type="text" placeholder="Please introduce the state"
+                    autocomplete="off">
+                <button id="btn-search"><i class="icon-search text-light"></i></button>
+            </div>
+            <div class="nav-bar">
+                <button id="btn-hidden"><i class="icon-align-left text-light"></i></button>
+                <button id="btn-geo" class="visibility"><i class="icon-target-1 text-light"></i></button>
+                <p class="text-light" id="place"> </p>
+                <button id="btn-watch-map" class="text-light map visibility"><i class="icon-location"></i></button>
+                <div class="nav-light theme">
+                    <button id="btn-theme">
                         <div></div>
+                    </button>
+                </div>
+            </div>
+            <div class="conditions">
+                <div></div>
+                <div></div>
+                <div>
+                    <div class="long-div">
+                        <div class="circle-down"></div>
                         <div>
                             <p id="event"></p>
-                            <h2></h2>
+                            <h2 id="temp"><span></span><sup>o</sup><sub></sub></h2>
                         </div>
-                        <div></div>
+                        <div class="circle-up"></div>
                     </div>
+                </div>
+                <div>
+                    <div class="long-div">
+                        <div class="circle-down"></div>
+                        <div>
+                            <p class="event"></p>
+                            <h2><span></span><sup>o</sup>C</h2>
+                        </div>
+                        <div class="circle-up"></div>
+                    </div>
+                </div>
+                <div>
+                    <div class="long-div">
+                        <div class="circle-down"></div>
+                        <div>
+                            <p class="event"></p>
+                            <h2><span></span><sup>o</sup>C</h2>
+                        </div>
+                        <div class="circle-up"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="cont-forecast forecast-light">
+            <div class="day-forecast">
+                <p class="text-light">Today</p>
+                <div data-day="today" class="btn-forecast day-forecast-light purple">
+                    <p class="text-light temp-forecast"><span></span><sup>o</sup></p>
+                    <img src="" class="icon-forecast" alt="">
+                    <p class="text-light forecast-date"></p>
+                    <p class="text-light time"></p>
                 </div>
             </div>
-            <div class="cont-forecast forecast-light">
-                <div class="day-forecast">
-                    <p class="text-light">Today</p>
-                    <div class="day-forecast-light purple">
-                        <p class="text-light temp-forecast"></p>
-                        <img src="" class="icon-forecast" alt="">
-                        <p class="text-light forecast-date"></p>
-                        <p class="text-light time"></p>
-                    </div>
+            <div class="day-forecast">
+                <p class="text-light"></p>
+                <div data-day="tomorrow" class="btn-forecast day-forecast-light">
+                    <p class="text-light temp-forecast"><span></span><sup>o</sup></p>
+                    <img src="" class="icon-forecast" alt="">
+                    <p class="text-light forecast-date"></p>
+                    <p class="text-light time"></p>
                 </div>
-                <div class="day-forecast">
-                    <p class="text-light">Tomorrow</p>
-                    <div class="day-forecast-light">
-                        <p class="text-light temp-forecast"></p>
-                        <img src="" class="icon-forecast" alt="">
-                        <p class="text-light forecast-date"></p>
-                        <p class="text-light time"></p>
-                    </div>
-                </div>
-                <div class="day-forecast">
-                    <p class="day-3 text-light">After Tomorrow</p>
-                    <div class="day-forecast-light">
-                        <p class="text-light temp-forecast"></p>
-                        <img src="" class="icon-forecast" alt="">
-                        <p class="text-light forecast-date"></p>
-                        <p class="text-light time"></p>
-                    </div>
+            </div>
+            <div class="day-forecast">
+                <button id="btn-next-hours" class="day-3 text-light">Next hours <i class="icon-right-open"></i></button>
+                <div data-day="after-tomorrow" class="btn-forecast day-forecast-light">
+                    <p class="text-light temp-forecast"><span></span><sup>o</sup></p>
+                    <img src="" class="icon-forecast" alt="">
+                    <p class="text-light forecast-date"></p>
+                    <p class="text-light time"></p>
                 </div>
             </div>
         </div>
     </div>
+    <div class="cont-main main-light hidden" id="scroll">
+        <div class="cont-scroll">
+            <div class="cont-current current-light cont-current-scroll">
+                <div class="nav-bar nav-bar-scroll">
+                    <button id="btn-return-scroll"><i class="icon-left text-light"></i></button>
+                    <p class="text-light">Next hours</p>
+                </div>
+                <div class="conditions-scroll">
+                    <div class="long-div long-div-scroll">
+                        <div class="circle-left"></div>
+                        <div class="icon icon-scroll"></div>
+                        <div>
+                            <p>Today</p>
+                            <h2 class="temp-max-min"><span></span> <sub>/ <span></span> <sup>o</sup></sub></h2>
+                            <p class="event-scroll"></p>
+                        </div>
+                        <div class="circle-right"> </div>
+                    </div>
+                </div>
+            </div>
+            <div class="canvas canvas-light">
+                <canvas id="chart-1" width="200" height="150"></canvas>
+            </div>
+            <div class="cont-forecast cont-forecast-scroll forecast-light">
+                <div class="cont-variables cont-variables-scroll variables-light">
+                    <div>
+                        <i class="icon-cloud-wind"></i>
+                        <p class="text-light wind-hour"><span></span> km/h</p>
+                        <p class="text-light">Wind</p>
+                    </div>
+                    <div>
+                        <i class="icon-droplet"></i>
+                        <p class="text-light humidity-hour"><span></span> %</p>
+                        <p class=" text-light">Humidity</p>
+                    </div>
+                    <div>
+                        <i class="icon-eye"></i>
+                        <p class="text-light visibility-hour"><span></span> Km</p>
+                        <p class="text-light">Visibility</p>
+                    </div>
+                </div>
+                <div class="order">
+                    <div class="time-scroll"></div>
+                    <div class="event-hour"></div>
+                    <div class="temp-hour"> </div>
+                </div>
+
+            </div>
+            <div class="cont-current current-light cont-current-scroll">
+                <div class="conditions-scroll">
+                    <div class="long-div long-div-scroll">
+                        <div class="circle-left"></div>
+                        <div class="icon icon-scroll"></div>
+                        <div>
+                            <p>Tomorrow</p>
+                            <h2 class="temp-max-min"><span></span> <sub>/ <span></span> <sup>o</sup></sub></h2>
+                            <p class="event-scroll"></p>
+                        </div>
+                        <div class="circle-right"> </div>
+                    </div>
+                </div>
+            </div>
+            <div class="canvas canvas-light">
+                <canvas id="chart-2" width="200" height="150"></canvas>
+            </div>
+
+            <div class="cont-forecast cont-forecast-scroll forecast-light">
+                <div class="cont-variables cont-variables-scroll variables-light">
+                    <div>
+                        <i class="icon-cloud-wind"></i>
+                        <p class="text-light wind-hour"><span></span> km/h</p>
+                        <p class="text-light">Wind</p>
+                    </div>
+                    <div>
+                        <i class="icon-droplet"></i>
+                        <p class="text-light humidity-hour"><span></span> %</p>
+                        <p class=" text-light">Humidity</p>
+                    </div>
+                    <div>
+                        <i class="icon-eye"></i>
+                        <p class="text-light visibility-hour"><span></span> Km</p>
+                        <p class="text-light">Visibility</p>
+                    </div>
+                </div>
+                <div class="order">
+                    <div>
+                        <p class="text-light">12:00 AM</p>
+                        <p class="text-light">1:00 AM</p>
+                        <p class="text-light">2:00 AM</p>
+                        <p class="text-light">3:00 AM</p>
+                        <p class="text-light">4:00 AM</p>
+                        <p class="text-light">5:00 AM</p>
+                        <p class="text-light">6:00 AM</p>
+                        <p class="text-light">7:00 AM</p>
+                        <p class="text-light">8:00 AM</p>
+                        <p class="text-light">9:00 AM</p>
+                        <p class="text-light">10:00 AM</p>
+                        <p class="text-light">11:00 AM</p>
+                        <p class="text-light">12:00 PM</p>
+                        <p class="text-light">1:00 PM</p>
+                        <p class="text-light">2:00 PM</p>
+                        <p class="text-light">3:00 PM</p>
+                        <p class="text-light">4:00 PM</p>
+                        <p class="text-light">5:00 PM</p>
+                        <p class="text-light">6:00 PM</p>
+                        <p class="text-light">7:00 PM</p>
+                        <p class="text-light">8:00 PM</p>
+                        <p class="text-light">9:00 PM</p>
+                        <p class="text-light">10:00 PM</p>
+                        <p class="text-light">11:00 PM</p>
+                    </div>
+                    <div class="event-hour-fix"></div>
+                    <div class="temp-hour-fix"></div>
+                </div>
+            </div>
+            <div class="cont-current current-light cont-current-scroll">
+                <div class="conditions-scroll">
+                    <div class="long-div long-div-scroll">
+                        <div class="circle-left"></div>
+                        <div class="icon icon-scroll"></div>
+                        <div>
+                            <p>After Tomorrow</p>
+                            <h2 class="temp-max-min"><span></span> <sub>/ <span></span> <sup>o</sup></sub></h2>
+                            <p class="event-scroll"></p>
+                        </div>
+                        <div class="circle-right"> </div>
+                    </div>
+                </div>
+            </div>
+            <div class="canvas canvas-light">
+                <canvas id="chart-3" width="200" height="150"></canvas>
+            </div>
+            <div class="cont-forecast cont-forecast-scroll forecast-light">
+                <div class="cont-variables cont-variables-scroll variables-light">
+                    <div>
+                        <i class="icon-cloud-wind"></i>
+                        <p class="text-light wind-hour"><span></span> km/h</p>
+                        <p class="text-light">Wind</p>
+                    </div>
+                    <div>
+                        <i class="icon-droplet"></i>
+                        <p class="text-light humidity-hour"><span></span> %</p>
+                        <p class=" text-light">Humidity</p>
+                    </div>
+                    <div>
+                        <i class="icon-eye"></i>
+                        <p class="text-light visibility-hour"><span></span> Km</p>
+                        <p class="text-light">Visibility</p>
+                    </div>
+                </div>
+                <div class="order">
+                    <div>
+                        <p class="text-light">12:00 AM</p>
+                        <p class="text-light">1:00 AM</p>
+                        <p class="text-light">2:00 AM</p>
+                        <p class="text-light">3:00 AM</p>
+                        <p class="text-light">4:00 AM</p>
+                        <p class="text-light">5:00 AM</p>
+                        <p class="text-light">6:00 AM</p>
+                        <p class="text-light">7:00 AM</p>
+                        <p class="text-light">8:00 AM</p>
+                        <p class="text-light">9:00 AM</p>
+                        <p class="text-light">10:00 AM</p>
+                        <p class="text-light">11:00 AM</p>
+                        <p class="text-light">12:00 PM</p>
+                        <p class="text-light">1:00 PM</p>
+                        <p class="text-light">2:00 PM</p>
+                        <p class="text-light">3:00 PM</p>
+                        <p class="text-light">4:00 PM</p>
+                        <p class="text-light">5:00 PM</p>
+                        <p class="text-light">6:00 PM</p>
+                        <p class="text-light">7:00 PM</p>
+                        <p class="text-light">8:00 PM</p>
+                        <p class="text-light">9:00 PM</p>
+                        <p class="text-light">10:00 PM</p>
+                        <p class="text-light">11:00 PM</p>
+                    </div>
+                    <div class="event-hour-fix"></div>
+                    <div class="temp-hour-fix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="cont-main main-light hidden" id="map">
+        <div class="cont-current current-light">
+            <div class="nav-bar nav-bar-scroll">
+                <button id="btn-return-map"><i class="icon-left text-light"></i></button>
+                <p class="text-light">Location</p>
+            </div>
+            <div class="google-map" id="google-map"></div>
+        </div>
+        <div class="cont-forecast cont-forecast-map forecast-light">
+            <div class="cont-variables variables-light">
+                <div>
+                    <i class="icon-cloud-wind"></i>
+                    <p class="text-light wind-map"><span></span> km/h</p>
+                    <p class="text-light">Wind</p>
+                </div>
+                <div>
+                    <i class="icon-droplet"></i>
+                    <p class="text-light humidity-map"><span></span> %</p>
+                    <p class="text-light">Humidity</p>
+                </div>
+                <div>
+                    <i class="icon-eye"></i>
+                    <p class="text-light visibility-map"><span></span> Km</p>
+                    <p class="text-light">Visibility</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDcdJdjTBaX7ocKoDW7EQgBa4r-DDmvQGE&callback=initMap"
+        async defer></script>
     <script src="select.js"></script>
-    <script src="get_date.js"></script>
     <script src="req.js"></script>
     <script src="javascript.js"></script>
+    
 </body>
 
 </html>
