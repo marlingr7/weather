@@ -43,11 +43,7 @@ function success(position) {
 }
 
 function error() {
-  Swal.fire({
-    icon: 'error',
-    title: 'Oops...',
-    text: "Error: The Geolocation service failed."
-  })
+  alert("Error: The Geolocation service failed.");
 }
 
 function initMap() {
@@ -55,11 +51,7 @@ function initMap() {
     navigator.geolocation.getCurrentPosition(success, error);
   } else {
     // Browser doesn't support Geolocation
-    Swal.fire({
-      icon: 'error',
-      title: 'Oops...',
-      text: "Error: Your browser doesn't support geolocation"
-    })
+    alert("Error: Your browser doesn't support geolocation");
   }
 }
 
@@ -179,7 +171,6 @@ $("#icon").click(function (e) {
   }
   e.preventDefault();
 });
-
 
 $("#btn-hidden").click(function (e) {
   $(".input").toggleClass("visibility");

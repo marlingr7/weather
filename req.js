@@ -244,13 +244,6 @@ function req(lat, lon, place, hour) {
         placeOut.text(place);
       }
 
-      //h2.each(function (item) {
-      //  console.log($(this).target);
-      //  $(this).data("temp", { celsius: tmpC[item], farenheit: tmpF[item] });
-      //  $(this).find(span).text($(this).data("temp").celsius);
-      //  $("sub").text("C");
-      //});
-
       temp.data("tmp", {
         celsius: [tmpHourC[hour], tmpHourC[24 + hour], tmpHourC[48 + hour]],
         farenheit: [tmpHourF[hour], tmpHourF[24 + hour], tmpHourF[48 + hour]],
@@ -355,11 +348,11 @@ function req(lat, lon, place, hour) {
       for (let j = hour; j < 24; j++) {
         if (j < 12) {
           $(".time-scroll").append("<p class='text-light'>" + j + ":00 AM</p>");
-        } else if (j > 12){
+        } else if (j > 12) {
           $(".time-scroll").append(
             "<p class='text-light'>" + (j - 12) + ":00 PM</p>"
           );
-        }else{
+        } else {
           $(".time-scroll").append("<p class='text-light'>" + j + ":00 PM</p>");
         }
 
@@ -478,11 +471,7 @@ function req(lat, lon, place, hour) {
       );
     },
     error: function () {
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: "Sorry. Place don't found. Please try something else!."
-      })
+      alert("Sorry. Place don't found. Please try something else!.");
     },
   });
 }

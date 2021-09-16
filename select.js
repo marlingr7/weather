@@ -139,9 +139,7 @@ function select(key) {
 
     $("#poss").empty();
     for (let i = 0; i < posibles.length; i++) {
-      if (
-        document.getElementById("poss").className == "poss body-light"
-      ) {
+      if (document.getElementById("poss").className == "poss body-light") {
         $("#poss").append(
           "<p class='p-poss text-light'>" + posibles[i] + "</p>"
         );
